@@ -24,6 +24,8 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #ifndef TR_LOCAL_H
 #define TR_LOCAL_H
 
+#define USE_JOFCLIENT
+
 #define USE_VBO					// store static world geometry in VBO
 
 #ifdef USE_VBO
@@ -795,7 +797,7 @@ typedef struct trRefdef_s {
 //=================================================================================
 
 // skins allow models to be retextured without modifying the model file
-#ifndef USE_OPENJK
+#if !defined(USE_OPENJK) && !defined(USE_JOFCLIENT)
 typedef struct {
 	char		name[MAX_QPATH];
 	shader_t	*shader;
@@ -1938,6 +1940,11 @@ extern	cvar_t	*r_marksOnTriangleMeshes;
 extern	cvar_t	*r_aspectCorrectFonts;
 extern	cvar_t	*cl_ratioFix;
 extern cvar_t	*r_patchStitching;
+
+#ifdef USE_JOFCLIENT
+extern	cvar_t	*r_ratioFix;
+extern	cvar_t	*r_fontOverride;
+#endif
 
 // Vulkan
 extern cvar_t	*r_defaultImage;
