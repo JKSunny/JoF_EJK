@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - beta
+      - vulkan-dev
     paths-ignore:
       - "**.md"
       - ".gitignore"
@@ -82,22 +83,6 @@ jobs:
 
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
-
-      - name: Download Sunny's Vulkan DLL
-        shell: bash
-        run: |
-          mkdir -p external
-          if [ "${{ matrix.arch }}" = "x86" ]; then
-            ZIP_NAME=EternalJK-windows-x86.zip
-            DLL_NAME=rd-vulkan_x86.dll
-          else
-            ZIP_NAME=EternalJK-windows-x86_64.zip
-            DLL_NAME=rd-vulkan_x86_64.dll
-          fi
-          curl -L -o external/$ZIP_NAME \
-            https://github.com/JKSunny/EternalJK/releases/download/latest/$ZIP_NAME
-          unzip -j external/$ZIP_NAME "$DLL_NAME" -d external
-          echo "RD_VULKAN_DLL=${{ github.workspace }}/external/$DLL_NAME" >> $GITHUB_ENV
 
       - name: Create build directory
         run: cmake -E make_directory build
@@ -488,22 +473,6 @@ jobs:
 
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
-
-      - name: Download Sunny's Vulkan DLL
-        shell: bash
-        run: |
-          mkdir -p external
-          if [ "${{ matrix.arch }}" = "x86" ]; then
-            ZIP_NAME=EternalJK-windows-x86.zip
-            DLL_NAME=rd-vulkan_x86.dll
-          else
-            ZIP_NAME=EternalJK-windows-x86_64.zip
-            DLL_NAME=rd-vulkan_x86_64.dll
-          fi
-          curl -L -o external/$ZIP_NAME \
-            https://github.com/JKSunny/EternalJK/releases/download/latest/$ZIP_NAME
-          unzip -j external/$ZIP_NAME "$DLL_NAME" -d external
-          echo "RD_VULKAN_DLL=${{ github.workspace }}/external/$DLL_NAME" >> $GITHUB_ENV
 
       - name: Create build directory
         run: cmake -E make_directory build
