@@ -14,9 +14,9 @@ on:
       - "docs/**"
 
   # Master: manual + nightly
-  workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * *" # midnight UTC
+  #workflow_dispatch:
+  #schedule:
+  #  - cron: "0 0 * * *" # midnight UTC
 
 jobs:
   # =========================
